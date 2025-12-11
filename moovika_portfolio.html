@@ -1,0 +1,447 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Moovika M — Portfolio</title>
+  <meta name="description" content="Portfolio of Moovika M — Full Stack Web Developer" />
+
+  <style>
+    /* ===== Reset & base ===== */
+    * {box-sizing: border-box; margin:0; padding:0}
+    html,body{height:100%; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; background: linear-gradient(180deg,#0f172a 0%, #07112a 60%); color:#e6eef8; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale}
+    a{color:inherit; text-decoration:none}
+    img{max-width:100%; display:block}
+
+    /* ===== Layout ===== */
+    .container{max-width:1100px; margin:36px auto; padding:28px; position:relative}
+    header{display:flex; gap:24px; align-items:center; justify-content:space-between}
+    .brand{display:flex; gap:18px; align-items:center}
+    .logo{
+      width:56px;height:56px;border-radius:14px;
+      background:linear-gradient(135deg,#7c3aed,#06b6d4);
+      display:flex;align-items:center;justify-content:center;
+      box-shadow:0 6px 30px rgba(12,15,30,0.6);
+      transform:rotate(-10deg);
+    }
+    .logo span{font-weight:700; font-size:20px; letter-spacing:0.6px; color:white}
+
+    nav{display:flex; gap:12px; align-items:center}
+    nav a{padding:8px 12px; border-radius:8px; font-weight:600; opacity:0.9}
+    nav a:hover{background:rgba(255,255,255,0.04); transform:translateY(-3px); transition:all .25s ease}
+
+    /* ===== Hero ===== */
+    .hero{
+      margin-top:28px; display:grid; grid-template-columns: 380px 1fr; gap:36px; align-items:center;
+      background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:26px; border-radius:18px; backdrop-filter: blur(6px); box-shadow: 0 8px 40px rgba(2,6,23,0.7);
+    }
+
+    .profile-card{
+      position:relative; padding:18px; border-radius:14px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      display:flex; gap:14px; align-items:center; flex-direction:column;
+    }
+    .pf-img{
+      width:190px; height:190px; border-radius:50%; overflow:hidden;
+      padding:6px; background:linear-gradient(180deg,#e9ecff, rgba(255,255,255,0.04));
+      box-shadow: 0 10px 30px rgba(3,10,40,0.6);
+      transform:translateY(-18px);
+      border:4px solid rgba(255,255,255,0.03);
+    }
+    .pf-img img{width:100%; height:100%; object-fit:cover; display:block}
+
+    .name{font-size:20px; font-weight:700; margin-top:6px; letter-spacing:0.2px}
+    .role{font-size:13px; opacity:0.8; margin-bottom:6px}
+    .contact-btn{display:inline-flex; gap:8px; align-items:center; padding:10px 16px; border-radius:999px; background:linear-gradient(90deg,#7c3aed,#06b6d4); color:white; font-weight:700; box-shadow: 0 8px 30px rgba(6,11,40,0.6)}
+    .contact-btn:hover{transform:translateY(-4px)}
+
+    .hero-info{padding:8px 6px}
+    .greeting{font-size:14px; opacity:0.8}
+    .title{font-size:36px; font-weight:800; margin:8px 0; line-height:1.02}
+    .typed { color:#a5b4fc; font-weight:700; }
+
+    .summary{margin-top:12px; line-height:1.6; color:#cfe3ff; opacity:0.95}
+    .cta-row{display:flex; gap:12px; margin-top:18px}
+
+    .btn-outline{padding:10px 16px; border-radius:12px; border:1px solid rgba(255,255,255,0.06); background:transparent; font-weight:700}
+    .btn-primary{padding:10px 16px; border-radius:12px; background:linear-gradient(90deg,#06b6d4,#7c3aed); color:white; font-weight:700}
+
+    /* ===== Sections ===== */
+    section{margin-top:28px; padding:22px; border-radius:14px; background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005)); box-shadow: 0 6px 30px rgba(3,8,20,0.5)}
+    .section-head{display:flex; align-items:center; gap:12px; margin-bottom:12px}
+    .section-head h2{font-size:18px; font-weight:800}
+    .section-head p{opacity:0.7; font-size:13px}
+
+    /* skill chips */
+    .skills{display:flex; gap:10px; flex-wrap:wrap}
+    .chip{padding:8px 12px; border-radius:999px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.03); font-weight:700; font-size:13px}
+
+    /* experience */
+    .timeline{display:flex; flex-direction:column; gap:12px}
+    .exp{display:grid; grid-template-columns: 1fr 140px; gap:18px; align-items:start; padding:10px; border-radius:12px; transition:transform .45s cubic-bezier(.2,.95,.2,1)}
+    .exp:hover{transform:translateY(-6px)}
+    .exp .role{font-weight:800; font-size:15px}
+    .exp .company{opacity:0.85; font-weight:700}
+    .exp small{display:block; opacity:0.7; font-size:13px; margin-top:6px}
+
+    /* projects */
+    .projects-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:12px}
+    .card{
+      padding:14px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border:1px solid rgba(255,255,255,0.03); transition:transform .35s ease, box-shadow .35s ease;
+      position:relative; overflow:hidden;
+    }
+    .card:hover{transform:translateY(-10px); box-shadow:0 20px 60px rgba(10,20,40,0.6)}
+    .card .tag{position:absolute; right:12px; top:12px; font-weight:700; opacity:0.9; font-size:12px; padding:6px 10px; border-radius:999px; background:rgba(255,255,255,0.03)}
+
+    /* progress */
+    .prog{display:flex; gap:12px; align-items:center}
+    .prog .bar{height:10px; width:160px; background:rgba(255,255,255,0.04); border-radius:999px; overflow:hidden}
+    .inner{height:100%; background:linear-gradient(90deg,#06b6d4,#7c3aed); width:0%; border-radius:999px; transition:width 1s ease}
+
+    /* contact */
+    .contact-grid{display:grid; grid-template-columns:1fr 320px; gap:18px}
+    form{display:flex; flex-direction:column; gap:10px}
+    input,textarea{padding:12px; border-radius:10px; border:1px solid rgba(255,255,255,0.04); background:transparent; color:inherit}
+    textarea{min-height:120px; resize:vertical}
+    .socials{display:flex; gap:10px; margin-top:10px}
+
+    /* small screens */
+    @media (max-width:900px){
+      .hero{grid-template-columns:1fr; padding:14px}
+      .profile-card{flex-direction:row; justify-content:flex-start; padding:12px}
+      .pf-img{width:110px; height:110px; transform:none}
+      .contact-grid{grid-template-columns:1fr}
+    }
+
+    /* ===== Animations / In-view ===== */
+    .reveal { opacity:0; transform: translateY(18px) scale(.995); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.95,.2,1);}
+    .reveal.in-view{ opacity:1; transform: none; }
+    /* small floating accent */
+    .accent {
+      position:absolute; width:220px; height:220px; right:-60px; top:-60px; z-index:0;
+      background: radial-gradient(circle at 20% 30%, rgba(124,58,237,0.12), transparent 20%), radial-gradient(circle at 80% 80%, rgba(6,182,212,0.12), transparent 30%);
+      filter: blur(28px);
+      pointer-events:none;
+    }
+
+    /* subtle floating */
+    .float {
+      animation: floaty 6s ease-in-out infinite;
+    }
+    @keyframes floaty {
+      0% { transform:translateY(0px); }
+      50%{ transform:translateY(-10px); }
+      100%{ transform:translateY(0px); }
+    }
+
+    /* tiny helpers */
+    .muted{opacity:0.75; font-size:13px}
+    .meta{opacity:0.7; font-size:13px}
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="accent float" aria-hidden="true"></div>
+
+    <header class="reveal">
+      <div class="brand">
+        <div class="logo"><span>MM</span></div>
+        <div>
+          <div style="font-weight:800">Moovika M</div>
+          <div class="muted" style="font-size:13px">Full Stack Web Developer • Coimbatore, India</div>
+        </div>
+      </div>
+
+      <nav>
+        <a href="#about">About</a>
+        <a href="#projects">Projects</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact" class="contact-btn">Hire me</a>
+      </nav>
+    </header>
+
+    <!-- HERO -->
+    <main class="hero reveal" id="home" role="main" aria-label="Main introduction">
+      <aside class="profile-card">
+        <div class="pf-img" title="Profile image (replace profile.jpg)">
+          <!-- Place profile.jpg / profile.png in same folder -->
+          <img src="profile.jpg" alt="Profile picture of Moovika M" onerror="this.src='https://via.placeholder.com/400?text=profile.jpg'">
+        </div>
+        <div style="text-align:center; margin-top:6px">
+          <div class="name">Moovika M</div>
+          <div class="role">Engineering student • Full Stack Web Dev</div>
+          <div style="margin-top:8px" class="meta">CGPA: 8.5 • Coimbatore, India</div>
+          <div style="margin-top:12px">
+            <a class="contact-btn" href="#contact">Contact</a>
+          </div>
+        </div>
+      </aside>
+
+      <section class="hero-info">
+        <div class="greeting">Hello — I'm</div>
+        <div class="title">Moovika M <span class="typed" id="typed"></span></div>
+
+        <p class="summary">
+          Engineering student specializing in Full Stack Web Development. I build responsive and accessible web apps using HTML, CSS and JavaScript. I enjoy creating efficient user interfaces and learning new technologies.
+        </p>
+
+        <div class="cta-row">
+          <a class="btn-primary" href="#projects">View Projects</a>
+          <a class="btn-outline" href="#experience">My Experience</a>
+        </div>
+
+        <div style="margin-top:18px" class="muted">Quick facts: HTML • CSS • JavaScript • React (Basics) • MySQL • GitHub</div>
+      </section>
+    </main>
+
+    <!-- ABOUT -->
+    <section id="about" class="reveal">
+      <div class="section-head">
+        <h2>About</h2>
+        <p class="muted">Short summary & skills</p>
+      </div>
+
+      <div style="display:flex; gap:18px; align-items:flex-start; flex-wrap:wrap">
+        <div style="flex:1; min-width:260px">
+          <p style="line-height:1.7">
+            I'm an engineering student (Adithya Institute of Technology) passionate about building full-stack web apps. I enjoy problem solving, UX-focused interfaces, and continuous learning. I completed a Full Stack internship at NextLogic Software Solutions in 2025 where I worked on front-end modules and API integrations.
+          </p>
+          <div style="margin-top:12px" class="meta">Communication: Tamil (Native) • English (Fluent)</div>
+        </div>
+
+        <div style="width:360px">
+          <div style="margin-bottom:10px"><strong>Technical Skills</strong></div>
+          <div class="skills">
+            <div class="chip">HTML</div>
+            <div class="chip">CSS</div>
+            <div class="chip">JavaScript</div>
+            <div class="chip">React (Basics)</div>
+            <div class="chip">MySQL</div>
+            <div class="chip">Python (Basics)</div>
+            <div class="chip">GitHub</div>
+            <div class="chip">Responsive Design</div>
+          </div>
+
+          <div style="margin-top:14px"><strong>Soft Skills</strong></div>
+          <div class="skills" style="margin-top:8px">
+            <div class="chip">Communication</div>
+            <div class="chip">Teamwork</div>
+            <div class="chip">Time Management</div>
+            <div class="chip">Quick Learner</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section id="experience" class="reveal">
+      <div class="section-head">
+        <h2>Experience</h2>
+        <p class="muted">Professional & internship roles</p>
+      </div>
+
+      <div class="timeline">
+        <article class="exp">
+          <div>
+            <div class="role">Full Stack Web Developer Intern</div>
+            <div class="company">NextLogic Software Solutions — Coimbatore</div>
+            <small>2025 — Internship. Developed modules using HTML, CSS, JavaScript & MySQL. Assisted API integration and debugging; worked with Git & Agile workflows.</small>
+          </div>
+          <div style="text-align:right" class="meta">2025 • Internship</div>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects" class="reveal">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <p class="muted">A few highlights — CRUD, IoT, Portfolio</p>
+      </div>
+
+      <div class="projects-grid">
+        <div class="card">
+          <div class="tag">Full Stack</div>
+          <h3>User Management System</h3>
+          <p class="meta">Complete CRUD platform: registration, authentication and optimized queries (improved retrieval performance ~20%).</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">IoT</div>
+          <h3>IoT-Based Home Automation</h3>
+          <p class="meta">Remote control of appliances; real-time logic with improved device activation speed (~15%).</p>
+        </div>
+
+        <div class="card">
+          <div class="tag">Web</div>
+          <h3>Portfolio Website</h3>
+          <p class="meta">This very responsive site — mobile friendly and focused on clarity and engagement.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EDUCATION & CERTS -->
+    <section id="education" class="reveal" style="display:grid; grid-template-columns:1fr 360px; gap:16px; align-items:start">
+      <div>
+        <div class="section-head"><h2>Education</h2><p class="muted">Academic background</p></div>
+        <div style="margin-top:8px">
+          <div style="margin-bottom:10px">
+            <strong>Adithya Institute of Technology</strong> — 2022–2026<br>
+            <span class="meta">CGPA: 8.5</span>
+          </div>
+          <div style="margin-bottom:10px">
+            <strong>Velumanickam Higher Secondary School</strong><br>
+            <span class="meta">HSC — 82%</span>
+          </div>
+          <div style="margin-bottom:10px">
+            <strong>M.G. Public School</strong><br>
+            <span class="meta">SSLC — 96%</span>
+          </div>
+        </div>
+      </div>
+
+      <aside>
+        <div class="section-head"><h2>Certifications</h2><p class="muted">Selected</p></div>
+        <ul style="margin-top:6px; list-style:none; padding-left:0; line-height:1.8">
+          <li>• MERN Stack Development — FreeCodeCamp</li>
+          <li>• Cyber Security Basics — NoviTech</li>
+          <li>• Full Stack Development — Novitech</li>
+        </ul>
+      </aside>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <div class="section-head">
+        <h2>Contact</h2>
+        <p class="muted">Interested in collaborating? Send a message.</p>
+      </div>
+
+      <div class="contact-grid">
+        <form id="contactForm" onsubmit="return onContactSubmit(event)">
+          <input type="text" id="name" placeholder="Your name" required>
+          <input type="email" id="email" placeholder="Your email" required>
+          <textarea id="message" placeholder="Write a short message" required></textarea>
+          <div style="display:flex; gap:10px; align-items:center">
+            <button class="btn-primary" type="submit">Send message</button>
+            <button class="btn-outline" type="button" onclick="downloadResume()">Download Resume</button>
+          </div>
+
+          <div class="socials">
+            <a class="chip" href="#" aria-label="LinkedIn">LinkedIn</a>
+            <a class="chip" href="#" aria-label="GitHub">GitHub</a>
+            <a class="chip" href="#" aria-label="Portfolio">Portfolio</a>
+          </div>
+        </form>
+
+        <div style="padding:12px; border-radius:10px; background:linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005))">
+          <h3 style="margin-bottom:6px">Contact details</h3>
+          <div class="meta">Coimbatore, India</div>
+          <div class="meta" style="margin-top:6px">Email: <strong>moovikamuniyasamy9505@gmail.com</strong></div>
+          <div style="margin-top:10px">
+            <strong>Availability</strong>
+            <p class="muted" style="margin-top:6px">Open to internships & entry-level roles. Ready to contribute to real-world projects.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer style="margin-top:18px; text-align:center; opacity:0.7" class="reveal">
+      © <span id="year"></span> Moovika M •
+    </footer>
+  </div>
+
+  <!-- ===== Scripts: simple animations & interactions ===== -->
+  <script>
+    // typed effect (simple)
+    const typedEl = document.getElementById('typed');
+    const phrases = ['Full Stack Developer', 'Frontend Engineer', 'React (Basics)', 'IoT Enthusiast'];
+    let idx = 0, chr = 0, reverse = false;
+    function typeLoop(){
+      const current = phrases[idx];
+      if(!reverse){
+        chr++;
+        typedEl.textContent = current.slice(0, chr);
+        if(chr === current.length){ reverse = true; setTimeout(typeLoop, 1000); return; }
+      } else {
+        chr--;
+        typedEl.textContent = current.slice(0, chr);
+        if(chr === 0){ reverse = false; idx = (idx+1)%phrases.length; setTimeout(typeLoop, 300); return; }
+      }
+      setTimeout(typeLoop, 70);
+    }
+    typeLoop();
+
+    // reveal on scroll
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting) entry.target.classList.add('in-view');
+      });
+    }, {threshold: 0.12});
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // progress animation for skills (use when in view)
+    // (we'll animate .inner widths when their section is visible)
+    const skillObserver = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting){
+          document.querySelectorAll('.inner').forEach((bar,i)=>{
+            const widths = [85,80,75,65]; // example percentages for skills
+            bar.style.width = (widths[i]||60) + '%';
+          });
+          skillObserver.disconnect();
+        }
+      });
+    }, {threshold:0.25});
+    // create progress bars in About (dynamically)
+    (function createProg(){
+      const container = document.querySelector('#about');
+      const wrapper = document.createElement('div');
+      wrapper.style.marginTop='16px';
+      wrapper.innerHTML = '<div style="display:flex;gap:18px;flex-wrap:wrap">'+
+        '<div style="min-width:200px"><div class="meta">HTML</div><div class="prog"><div class="bar"><div class="inner"></div></div></div></div>'+
+        '<div style="min-width:200px"><div class="meta">CSS</div><div class="prog"><div class="bar"><div class="inner"></div></div></div></div>'+
+        '<div style="min-width:200px"><div class="meta">JavaScript</div><div class="prog"><div class="bar"><div class="inner"></div></div></div></div>'+
+        '<div style="min-width:200px"><div class="meta">React (Basics)</div><div class="prog"><div class="bar"><div class="inner"></div></div></div></div>' +
+        '</div>';
+      container.appendChild(wrapper);
+      skillObserver.observe(container);
+    })();
+
+    // basic contact handling (client-only, shows toast)
+    function onContactSubmit(e){
+      e.preventDefault();
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      if(!name||!email||!message){ alert('Please fill all fields'); return false; }
+      // show a success animation / message
+      alert('Thanks, ' + name + '! Your message was recorded (demo).');
+      e.target.reset();
+      return false;
+    }
+
+    // download resume - attempts to open local PDF filename if present
+    function downloadResume(){
+      // filename from uploaded resume: "MOOVIKA_M (1).pdf" — but local users may rename it.
+      // We'll attempt to open 'resume.pdf' or fallback to the file uploaded to your environment.
+      const candidates = ['resume.pdf','MOOVIKA_M.pdf','MOOVIKA_M (1).pdf','MOOVIKA_M (1).pdf'];
+      for(const c of candidates){
+        try { window.open(c, '_blank'); return; } catch(e){}
+      }
+      alert('Resume file not found locally. Replace the filename or add your resume as resume.pdf next to index.html');
+    }
+
+    // footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // tiny: animated floating accent stops when user interacts with page (optional)
+    window.addEventListener('scroll', function(){ document.querySelectorAll('.float').forEach(n=>n.style.opacity=1); });
+  </script>
+</body>
+</html>
